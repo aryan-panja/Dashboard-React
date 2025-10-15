@@ -470,7 +470,7 @@ const sidebarData = {
 
 export function SidebarLeft({ className, ...props }) {
   return (
-    <Sidebar className={cn("border-r-0", className)} {...props}>
+    <Sidebar className={cn("", className)} {...props}>
       <SidebarContent className={"gap-[16px]"}>
         {/* first */}
         <div className="flex items-center gap-[8px] p-[4px]">
