@@ -19,11 +19,11 @@ export const AppLayout = () => {
     <SidebarProvider>
       <SidebarLeft
         className={
-          "h-[1206px] w-[212px] border-r-[1px] border-[#1C1C1C1A] px-[16px] py-[20px] bg-sidebar gap-[16px]"
+          "bg-sidebar w-[212px] gap-[16px] border-r-[1px] border-[#1C1C1C1A] px-[16px] py-[20px]"
         }
       />
       <SidebarInset>
-        <header className="bg-background sticky top-0 flex h-14 shrink-0 items-center gap-2">
+        <header className="bg-background sticky top-0 flex h-14 shrink-0 items-center gap-2 border-b-1 border-b-[#1C1C1C1A]">
           <div className="flex flex-1 items-center gap-2 px-3">
             <SidebarTrigger />
             <Separator
