@@ -129,3 +129,14 @@
     @apply bg-background text-foreground font-inter;
   }
 }
+
+*::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background-color: #aaa; /* or add it to the track */
+}
+
+/* Add a thumb */
+*::-webkit-scrollbar-thumb {
+  background: #0e1a23;
+}
