@@ -26,35 +26,68 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { BellIcon, LightIcon, RecentIcon, StarIcon } from "@/icons/NavbarIcons";
-import { Star } from "lucide-react";
 import { Link, Outlet, useLocation } from "react-router";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/context/theme-provider";
+import {
+  BellIconDark,
+  LightIconDark,
+  RecentIconDark,
+  StarIconDark,
+} from "@/icons/dark/NavbarIcons";
 
 export const AppLayout = () => {
+  const { setTheme, theme } = useTheme();
   const location = useLocation();
-  const pathSegments = location.pathname.split("/").filter(Boolean); // remove empty strings
+  const pathSegments = location.pathname.split("/").filter(Boolean);
 
   // Helper to capitalize first letter
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
   // console.log(location);
 
+  const iconsClassName = "hover:bg-muted-background-2 rounded-[8px]";
+
+  const icons =
+    theme === "dark"
+      ? {
+          star: <StarIconDark className={iconsClassName} />,
+          light: (
+            <LightIconDark
+              className={iconsClassName}
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            />
+          ),
+          recent: <RecentIconDark className={iconsClassName} />,
+          bell: <BellIconDark className={iconsClassName} />,
+        }
+      : {
+          star: <StarIcon className={iconsClassName} />,
+          light: (
+            <LightIcon
+              className={iconsClassName}
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            />
+          ),
+          recent: <RecentIcon className={iconsClassName} />,
+          bell: <BellIcon className={iconsClassName} />,
+        };
+
   return (
     <SidebarProvider>
       <SidebarLeft
         className={
-          "bg-background w-[212px] gap-[16px] border-r-[1px] border-[#1C1C1C1A] px-[16px] py-[20px]"
+          "bg-background z-50 w-[212px] gap-[16px] border-r-[1px] px-[16px] py-[20px]"
         }
       />
       <SidebarInset>
-        <header className="bg-background sticky top-0 z-50 flex h-14 shrink-0 items-center gap-2 border-b-[1px]">
+        <header className="bg-background sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b-[1px]">
           <div className="flex w-full items-center justify-between gap-2 px-[28px] py-[20px]">
             {" "}
             {/* left */}
@@ -62,7 +95,7 @@ export const AppLayout = () => {
             <div className="flex items-center justify-start gap-[8px]">
               <SidebarTrigger />
 
-              <StarIcon className="hover:bg-muted-background-2 rounded-[8px]" />
+              {icons.star}
 
               <Breadcrumb>
                 <BreadcrumbList className="gap-[8px]">
@@ -75,7 +108,7 @@ export const AppLayout = () => {
                       <React.Fragment key={segment}>
                         <BreadcrumbItem>
                           {isLast ? (
-                            <BreadcrumbPage className="line-clamp-1 font-medium text-black capitalize">
+                            <BreadcrumbPage className="line-clamp-1 font-medium text-black capitalize dark:text-[#FFFFFF]">
                               {capitalize(segment)}
                             </BreadcrumbPage>
                           ) : (
@@ -89,21 +122,7 @@ export const AppLayout = () => {
                         </BreadcrumbItem>
 
                         {!isLast && (
-                          <BreadcrumbSeparator>
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M16 3L8 21"
-                                stroke="#1C1C1C33"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              ></path>
-                            </svg>
-                          </BreadcrumbSeparator>
+                          <BreadcrumbSeparator>/</BreadcrumbSeparator>
                         )}
                       </React.Fragment>
                     );
@@ -114,14 +133,16 @@ export const AppLayout = () => {
             {/* right */}
             <div className="flex items-center gap-[20px]">
               <NavCommand
-                className={"w-[160px] rounded-[8px] border-0 bg-[#1C1C1C0D]"}
+                className={
+                  "dark:placeholder:text-[]#FFFFFF33] w-[160px] rounded-[8px] border-0 bg-[#1C1C1C0D] dark:bg-[#FFFFFF1A] dark:text-[#FFFFFF33]"
+                }
               />
               <div className="flex items-center gap-[8px]">
-                <LightIcon className="hover:bg-muted-background-2 rounded-[8px]"/>
+                {icons.light}
 
-                <RecentIcon className="hover:bg-muted-background-2 rounded-[8px]"/>
+                {icons.recent}
 
-                <BellIcon className="hover:bg-muted-background-2 rounded-[8px]"/>
+                {icons.bell}
 
                 <SidebarTrigger />
               </div>
@@ -132,7 +153,7 @@ export const AppLayout = () => {
           <Outlet />
         </div>
       </SidebarInset>
-      <SidebarRight className="bg-background w-[280px] gap-[24px] border-l-[1px] border-[#1C1C1C1A] p-[20px]" />
+      <SidebarRight className="bg-background w-[280px] gap-[24px] border-l-[1px] p-[20px]" />
     </SidebarProvider>
   );
 };
@@ -163,11 +184,11 @@ export const NavCommand = ({ className }) => {
       >
         <span className="flex grow items-center">
           <SearchIcon
-            className="-ms-1 me-3 text-[#1C1C1C33]"
+            className="-ms-1 me-3 text-[#1C1C1C33] dark:text-[#FFFFFF33]"
             size={16}
             aria-hidden="true"
           />
-          <span className="text-[14px] font-normal text-[#1C1C1C33]">
+          <span className="text-[14px] font-normal text-[#1C1C1C33] dark:text-[#FFFFFF33]">
             Search
           </span>
         </span>

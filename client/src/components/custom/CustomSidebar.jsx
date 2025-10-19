@@ -17,6 +17,7 @@ import {
 import React, { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router";
+import { useTheme } from "@/context/theme-provider";
 
 // 🧱 Sidebar Block
 export const SidebarBlock = forwardRef(
@@ -55,6 +56,7 @@ export const SidebarBlockHeading = forwardRef(
 SidebarBlockHeading.displayName = "SidebarBlockHeading";
 
 export const SidebarList = ({ data, active }) => {
+  const { theme } = useTheme();
   return (
     <SidebarGroup className={"pl-0"}>
       <SidebarGroupContent>
@@ -66,7 +68,7 @@ export const SidebarList = ({ data, active }) => {
               className={` ${active === d.name.toLowerCase() ? "bg-muted-background" : ""} relative rounded-[8px]`}
             >
               {active === d.name.toLowerCase() && (
-                <div className="absolute top-1/2 left-0 h-[16px] w-[4px] -translate-y-1/2 rounded-[8px] bg-black"></div>
+                <div className="absolute top-1/2 left-0 h-[16px] w-[4px] -translate-y-1/2 rounded-[8px] bg-black dark:bg-[#CDCEFF]"></div>
               )}
               <SidebarMenuItem key={i}>
                 <Collapsible className="group/collapsible [&[data-state=open]>button>svg:first-child]:rotate-90">
@@ -76,7 +78,7 @@ export const SidebarList = ({ data, active }) => {
                     >
                       <ChevronRight className="transition-transform" />
                       <div className="flex items-center justify-center gap-[4px]">
-                        {d.logo}
+                        {theme === "dark" ? d.dark : d.logo}
                         {/* <Folder /> */}
                         {d.name}
                       </div>

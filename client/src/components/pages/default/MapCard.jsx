@@ -7,6 +7,7 @@ import {
   Marker,
 } from "@vnedyalk0v/react19-simple-maps";
 import { Card } from "@/components/ui/card";
+import { useTheme } from "@/context/theme-provider";
 
 const markers = [
   { name: "New York", coordinates: [-120, 37], value: "72K", width: "80%" },
@@ -21,6 +22,7 @@ const markers = [
 ];
 
 export const MapCard = () => {
+  const { theme } = useTheme();
   return (
     <Card
       className={
@@ -29,7 +31,7 @@ export const MapCard = () => {
     >
       <h1 className="text-[14px] font-[600]">Revenue by Location</h1>
 
-      <Map />
+      <Map fill={theme === "dark" ? "#677680" : "#A8C5DA"} />
 
       {markers.map(({ name, value, width }, index) => (
         <div className="w-full" key={index}>
@@ -37,7 +39,7 @@ export const MapCard = () => {
             <h1>{name}</h1>
             <h1>{value}</h1>
           </div>
-          <div className="h-[2px] w-full rounded-[80px] bg-[#E6EEF5]">
+          <div className="h-[2px] w-full rounded-[80px] bg-[#E6EEF5] dark:bg-[#373B3E]">
             <div
               className="h-[2px] rounded-[80px] bg-[#A8C5DA]"
               style={{ width }}
@@ -51,7 +53,7 @@ export const MapCard = () => {
 
 const geoUrl = "https://unpkg.com/world-atlas@2/countries-110m.json";
 
-const Map = () => {
+const Map = ({ fill }) => {
   return (
     <ComposableMap
       projection="geoEqualEarth"
@@ -69,7 +71,7 @@ const Map = () => {
               key={i}
               geography={geo}
               style={{
-                default: { fill: "#A8C5DA", outline: "none" },
+                default: { fill: fill, outline: "none" },
               }}
             />
           ))

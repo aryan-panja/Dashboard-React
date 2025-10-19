@@ -84,6 +84,12 @@ import {
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { ArrowDownUpIcon, FilterIcon, PlusIcon } from "@/icons/MiscIcons";
+import { useTheme } from "@/context/theme-provider";
+import {
+  ArrowDownUpIconDark,
+  FilterIconDark,
+  PlusIconDark,
+} from "@/icons/dark/MiscIcons";
 
 // Custom filter function for multi-column searching
 const multiColumnFilterFn = (row, columnId, filterValue) => {
@@ -218,6 +224,7 @@ const columns = [
 ];
 
 export const TableComponent = () => {
+  const { theme } = useTheme();
   const id = useId();
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -318,18 +325,33 @@ export const TableComponent = () => {
       ?.setFilterValue(newFilterValue.length ? newFilterValue : undefined);
   };
 
+  const iconsClassName = "hover:bg-muted-background-2 rounded-[8px]";
+
+  const icons =
+    theme === "dark"
+      ? {
+          plus: <PlusIconDark className={iconsClassName} />,
+          filter: <FilterIconDark className={iconsClassName} />,
+          arrow: <ArrowDownUpIconDark className={iconsClassName} />,
+        }
+      : {
+          plus: <PlusIcon className={iconsClassName} />,
+          filter: <FilterIcon className={iconsClassName} />,
+          arrow: <ArrowDownUpIcon className={iconsClassName} />,
+        };
+
   return (
     <div className="mt-[20px] flex flex-col gap-[12px]">
       {/* Filters */}
-      <div className="flex flex-wrap items-center justify-between gap-[16px] rounded-[8px] bg-[#F7F9FB] p-[8px]">
+      <div className="flex flex-wrap items-center justify-between gap-[16px] rounded-[8px] bg-[#F7F9FB] p-[8px] dark:bg-[#FFFFFF0D]">
         <div className="flex items-center gap-3">
           {/* Add Button */}
-          <PlusIcon className="hover:bg-muted-background-2 rounded-[8px]" />
+          {icons.plus}
           {/* Filter by status */}
-          <FilterIcon className="hover:bg-muted-background-2 rounded-[8px]" />
+          {icons.filter}
 
           {/* Toggle columns visibility */}
-          <ArrowDownUpIcon className="hover:bg-muted-background-2 rounded-[8px]" />
+          {icons.arrow}
         </div>
         <div className="flex items-center gap-3">
           {/* Delete button */}
@@ -340,7 +362,7 @@ export const TableComponent = () => {
               id={`${id}-input`}
               ref={inputRef}
               className={cn(
-                "peer h-[28px] w-[160px] min-w-60 ps-9 text-[#1C1C1C33] placeholder:text-[#1C1C1C33]",
+                "peer h-[28px] w-[160px] min-w-60 ps-9 text-[#1C1C1C33] placeholder:text-[#1C1C1C33] dark:bg-[#1C1C1C66] dark:placeholder:text-[#FFFFFF33]",
                 Boolean(table.getColumn("name")?.getFilterValue()) && "pe-9",
               )}
               value={table.getColumn("name")?.getFilterValue() ?? ""}
@@ -351,7 +373,7 @@ export const TableComponent = () => {
               type="text"
               aria-label="Filter by name or email"
             />
-            <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-[#1C1C1C33] peer-disabled:opacity-50">
+            <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-[#1C1C1C33] peer-disabled:opacity-50 dark:text-[#FFFFFF33]">
               <Search size={16} aria-hidden="true" />
             </div>
             {Boolean(table.getColumn("name")?.getFilterValue()) && (

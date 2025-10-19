@@ -59,6 +59,7 @@ import {
   SocialIcon,
 } from "@/icons/SidebarIcons";
 import { useLocation } from "react-router";
+import { AccountIconDark, BagIconDark, BookIconDark, FolderIconDark, OpenBookIconDark, PeopleIconDark, PieChartIconDark, ProfileIconDark, SocialIconDark } from "@/icons/dark/SidebarIcons";
 
 const sidebarData = {
   fav: [
@@ -86,6 +87,7 @@ const sidebarData = {
       name: "Default",
       url: "/default",
       logo: <PieChartIcon />,
+      dark: <PieChartIconDark />,
       pages: [
         // {
         //   name: "Daily Journal & Reflection",
@@ -107,17 +109,20 @@ const sidebarData = {
     {
       name: "eCommerce",
       url: "#",
-      logo: <BagIcon />,
+      logo: <BagIcon/>,
+      dark: <BagIconDark/>,
     },
     {
       name: "Projects",
       url: "#",
       logo: <FolderIcon />,
+      dark: <FolderIconDark />,
     },
     {
       name: "Online Courses",
       url: "#",
       logo: <OpenBookIcon />,
+      dark: <OpenBookIconDark />,
     },
   ],
   pages: [
@@ -125,6 +130,7 @@ const sidebarData = {
       name: "User Profile",
       url: "#",
       logo: <ProfileIcon />,
+      dark: <ProfileIconDark />,
       pages: [
         {
           name: "Overview",
@@ -152,21 +158,25 @@ const sidebarData = {
       name: "Account",
       url: "#",
       logo: <AccountIcon />,
+      dark: <AccountIconDark />,
     },
     {
       name: "Corporate",
       url: "#",
       logo: <PeopleIcon />,
+      dark: <PeopleIconDark />,
     },
     {
       name: "Blog",
       url: "#",
       logo: <BookIcon />,
+      dark: <BookIconDark />,
     },
     {
       name: "Social",
       url: "#",
       logo: <SocialIcon />,
+      dark: <SocialIconDark />,
     },
   ],
 };
@@ -204,7 +214,7 @@ export function SidebarLeft({ className, ...props }) {
             {tabs.map((t, i) => (
               <button
                 key={i}
-                className={`${t.id === tab ? "text-sidebar-foreground-muted" : "text-[#1C1C1C33]"} hover:bg-muted-background rounded-[8px]`}
+                className={`${t.id === tab ? "text-sidebar-foreground-muted" : "text-[#1C1C1C33] dark:text-[#FFFFFF33]"} hover:bg-muted-background rounded-[8px]`}
                 onClick={() => setTab(t.id)}
               >
                 {t.name}

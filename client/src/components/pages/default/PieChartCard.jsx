@@ -3,7 +3,12 @@ import { Card } from "@/components/ui/card";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 export const description = "A donut chart";
-const COLORS = ["#1a1a1a", "#6366f1", "#93c5fd", "#86efac"];
+const COLORS = [
+  "var(--chart-4)",
+  "var(--chart-5)",
+  "var(--chart-6)",
+  "var(--chart-7)",
+];
 const data = [
   { name: "Direct", value: 300.56, percentage: 38.6 },
   { name: "Affiliate", value: 135.18, percentage: 17.4 },
@@ -35,7 +40,11 @@ export const PieChartCard = () => {
                 endAngle={-270}
               >
                 {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index]}
+                    className="border-0"
+                  />
                 ))}
               </Pie>
             </PieChart>

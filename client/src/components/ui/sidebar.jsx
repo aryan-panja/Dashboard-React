@@ -23,6 +23,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { SidebarTriggerIcon } from "@/icons/MiscIcons";
+import { useTheme } from "@/context/theme-provider";
+import { SidebarTriggerIconDark } from "@/icons/dark/MiscIcons";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -254,7 +256,17 @@ function Sidebar({
 
 function SidebarTrigger({ className, onClick, ...props }) {
   const { toggleSidebar } = useSidebar();
-
+  const { theme } = useTheme();
+  if (theme === "dark") {
+    return (
+      <SidebarTriggerIconDark
+        onClick={(event) => {
+          onClick?.(event);
+          toggleSidebar();
+        }}
+      />
+    );
+  }
   return (
     <SidebarTriggerIcon
       onClick={(event) => {

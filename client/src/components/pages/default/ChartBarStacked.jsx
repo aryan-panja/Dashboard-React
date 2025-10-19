@@ -31,17 +31,6 @@ const data = [
   { month: "Jun", projections: 21, actuals: 3 },
 ];
 
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-1)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--chart-2)",
-  },
-};
-
 export const ChartBarStacked = () => {
   return (
     <Card
