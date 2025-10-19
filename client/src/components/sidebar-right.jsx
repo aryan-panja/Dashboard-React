@@ -140,7 +140,7 @@ const SidebarList = ({ heading, data, stepper = false }) => {
             {n.avatar && (
               <Avatar className={"size-[24px]"}>
                 <AvatarImage
-                  src={n.avatar || "https://github.com/shadcn.png"}
+                  src={"https://github.com/shadcn.png"}
                   alt="@shadcn"
                 />
                 <AvatarFallback>{n.name}</AvatarFallback>
@@ -148,7 +148,7 @@ const SidebarList = ({ heading, data, stepper = false }) => {
             )}
 
             {stepper && i !== data.length - 1 && (
-              <div className="absolute top-full left-1/2 h-[14px] w-[1px] -translate-x-1/2 bg-[#1C1C1C1A]" />
+              <div className="absolute top-[130%] left-1/2 h-[14px] w-[1px] -translate-x-1/2 bg-[#1C1C1C1A]" />
             )}
           </div>
 

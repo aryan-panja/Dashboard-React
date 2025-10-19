@@ -8,6 +8,18 @@ import {
 } from "@vnedyalk0v/react19-simple-maps";
 import { Card } from "@/components/ui/card";
 
+const markers = [
+  { name: "New York", coordinates: [-120, 37], value: "72K", width: "80%" },
+  { name: "San Francisco", coordinates: [-80, 37], value: "39K", width: "45%" },
+  { name: "Sydney", coordinates: [140, -25], value: "25K", width: "55%" },
+  {
+    name: "Singapore",
+    coordinates: [103.8198, 1.3521],
+    value: "61K",
+    width: "70%",
+  },
+];
+
 export const MapCard = () => {
   return (
     <Card
@@ -19,45 +31,20 @@ export const MapCard = () => {
 
       <Map />
 
-      <div className="w-full">
-        <div className="flex items-center justify-between">
-          <h1>New York</h1>
-          <h1>72K</h1>
+      {markers.map(({ name, value, width }, index) => (
+        <div className="w-full">
+          <div className="flex items-center justify-between" key={index}>
+            <h1>{name}</h1>
+            <h1>{value}</h1>
+          </div>
+          <div className="h-[2px] w-full rounded-[80px] bg-[#E6EEF5]">
+            <div
+              className="h-[2px] rounded-[80px] bg-[#A8C5DA]"
+              style={{ width }}
+            />
+          </div>
         </div>
-        <div className="w-full rounded-[80px] bg-[#E6EEF5]">
-          <div className="size-1 w-[50%] rounded-[80px] bg-[#A8C5DA]" />
-        </div>
-      </div>
-
-      <div className="w-full">
-        <div className="flex items-center justify-between">
-          <h1>New York</h1>
-          <h1>72K</h1>
-        </div>
-        <div className="w-full rounded-[80px] bg-[#E6EEF5]">
-          <div className="size-1 w-[50%] rounded-[80px] bg-[#A8C5DA]" />
-        </div>
-      </div>
-
-      <div className="w-full">
-        <div className="flex items-center justify-between">
-          <h1>New York</h1>
-          <h1>72K</h1>
-        </div>
-        <div className="w-full rounded-[80px] bg-[#E6EEF5]">
-          <div className="size-1 w-[50%] rounded-[80px] bg-[#A8C5DA]" />
-        </div>
-      </div>
-
-      <div className="w-full">
-        <div className="flex items-center justify-between">
-          <h1>New York</h1>
-          <h1>72K</h1>
-        </div>
-        <div className="w-full rounded-[80px] bg-[#E6EEF5]">
-          <div className="size-1 w-[50%] rounded-[80px] bg-[#A8C5DA]" />
-        </div>
-      </div>
+      ))}
     </Card>
   );
 };
@@ -72,7 +59,7 @@ const Map = () => {
         // scale: 147,
         center: [0, 0],
       }}
-      className="h-full w-fit"
+      className="h-full w-full"
     >
       {/* World Map */}
       <Geographies geography={geoUrl}>
@@ -90,15 +77,11 @@ const Map = () => {
       </Geographies>
 
       {/* Markers */}
-      {/* USA (approx: longitude -95, latitude 37) */}
-      <Marker coordinates={[-95, 37]}>
-        <circle r={4} fill="black" />
-      </Marker>
-
-      {/* Australia (approx: longitude 133, latitude -25) */}
-      <Marker coordinates={[133, -25]}>
-        <circle r={4} fill="black" />
-      </Marker>
+      {markers.map(({ name, coordinates }) => (
+        <Marker key={name} coordinates={coordinates}>
+          <circle r={15} fill="black" stroke="#fff" strokeWidth={8} />
+        </Marker>
+      ))}
     </ComposableMap>
   );
 };
