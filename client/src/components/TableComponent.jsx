@@ -20,9 +20,7 @@ import {
   CircleXIcon,
   Columns3Icon,
   EllipsisIcon,
-  FilterIcon,
   ListFilterIcon,
-  PlusIcon,
   Search,
   TrashIcon,
 } from "lucide-react";
@@ -85,6 +83,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { ArrowDownUpIcon, FilterIcon, PlusIcon } from "@/icons/MiscIcons";
 
 // Custom filter function for multi-column searching
 const multiColumnFilterFn = (row, columnId, filterValue) => {
@@ -325,23 +324,12 @@ export const TableComponent = () => {
       <div className="flex flex-wrap items-center justify-between gap-[16px] rounded-[8px] bg-[#F7F9FB] p-[8px]">
         <div className="flex items-center gap-3">
           {/* Add Button */}
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 28 28"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M14.625 8.375C14.625 8.02982 14.3452 7.75 14 7.75C13.6548 7.75 13.375 8.02982 13.375 8.375V13.375H8.375C8.02982 13.375 7.75 13.6548 7.75 14C7.75 14.3452 8.02982 14.625 8.375 14.625H13.375V19.625C13.375 19.9702 13.6548 20.25 14 20.25C14.3452 20.25 14.625 19.9702 14.625 19.625V14.625H19.625C19.9702 14.625 20.25 14.3452 20.25 14C20.25 13.6548 19.9702 13.375 19.625 13.375H14.625V8.375Z"
-              fill="#1C1C1C"
-            />
-          </svg>
+          <PlusIcon className="hover:bg-muted-background-2 rounded-[8px]" />
           {/* Filter by status */}
-          <ListFilterIcon size={16} aria-hidden="true" />
+          <FilterIcon className="hover:bg-muted-background-2 rounded-[8px]" />
 
           {/* Toggle columns visibility */}
-          <ArrowDownUp size={16} aria-hidden="true" />
+          <ArrowDownUpIcon className="hover:bg-muted-background-2 rounded-[8px]" />
         </div>
         <div className="flex items-center gap-3">
           {/* Delete button */}

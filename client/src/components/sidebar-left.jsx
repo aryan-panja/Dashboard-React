@@ -58,6 +58,7 @@ import {
   ProfileIcon,
   SocialIcon,
 } from "@/icons/SidebarIcons";
+import { useLocation } from "react-router";
 
 const sidebarData = {
   fav: [
@@ -176,6 +177,11 @@ const tabs = [
 ];
 
 export function SidebarLeft({ className, ...props }) {
+  const location = useLocation();
+
+  const active = location.pathname.split("/").filter(Boolean).pop(); // "default"  
+  // console.log("Last Segment:", lastSegment);
+
   const [tab, setTab] = React.useState(1);
 
   const tabData = tab === 1 ? sidebarData.fav : sidebarData.recents;
@@ -198,7 +204,7 @@ export function SidebarLeft({ className, ...props }) {
             {tabs.map((t, i) => (
               <button
                 key={i}
-                className={`${t.id === tab ? "text-sidebar-foreground-muted" : "text-[#1C1C1C33]"}`}
+                className={`${t.id === tab ? "text-sidebar-foreground-muted" : "text-[#1C1C1C33]"} hover:bg-muted-background rounded-[8px]`}
                 onClick={() => setTab(t.id)}
               >
                 {t.name}
@@ -217,7 +223,7 @@ export function SidebarLeft({ className, ...props }) {
         {/* third */}
         <SidebarBlock>
           <SidebarBlockHeading>Dashboards</SidebarBlockHeading>
-          <SidebarList data={sidebarData.dashboards} />
+          <SidebarList data={sidebarData.dashboards} active={active} />
         </SidebarBlock>
 
         {/* fourht */}

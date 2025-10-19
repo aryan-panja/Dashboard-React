@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { TrendDownIcon, TrendUpIcon } from "@/icons/MiscIcons";
 import { cn } from "@/lib/utils";
 import React from "react";
+import { Link } from "react-router";
 
 const data = [
   {
@@ -15,6 +16,7 @@ const data = [
     bg: "#E3F5FF",
     count: "3,781",
     percent: "+11.01%",
+    hover: "hover:bg-[#D8E9F3]",
     icon: <TrendUpIcon />,
   },
   {
@@ -22,13 +24,16 @@ const data = [
     bg: "#F7F9FB",
     count: "1,219",
     percent: "-0.03%",
+    hover: "hover:bg-[#EBEDEF]",
     icon: <TrendDownIcon />,
+    url: "/dashboard/order-list",
   },
   {
     heading: "Revenue",
     bg: "#F7F9FB",
     count: "$695",
     percent: "+15.03%",
+    hover: "hover:bg-[#EBEDEF]",
     icon: <TrendUpIcon />,
   },
   {
@@ -36,6 +41,7 @@ const data = [
     bg: "#E5ECF6",
     count: "30.1%",
     percent: "+6.08%",
+    hover: "hover:bg-[#DAE1EA]",
     icon: <TrendUpIcon />,
   },
 ];
@@ -57,6 +63,8 @@ export const Default = () => {
               count={item.count}
               percent={item.percent}
               icon={item.icon}
+              hover={item.hover}
+              url={item.url}
             />
           ))}
         </div>
@@ -85,7 +93,16 @@ export const Default = () => {
   );
 };
 
-const DataCard = ({ className, heading, bg, count, percent, icon }) => {
+const DataCard = ({
+  className,
+  heading,
+  bg,
+  count,
+  percent,
+  icon,
+  hover,
+  url,
+}) => {
   return (
     <Card
       className={cn(
@@ -96,15 +113,18 @@ const DataCard = ({ className, heading, bg, count, percent, icon }) => {
     >
       <h1 className="font-[600]">{heading}</h1>
 
-      <div className="flex items-center justify-between">
+      <Link
+        to={url}
+        className={`flex items-center justify-between rounded-[8px] transition-all hover:flex-row-reverse ${hover}`}
+      >
         <h1 className="text-[24px] font-[600]">{count}</h1>
 
-        <div className="items*center flex gap-[4px]">
+        <div className="flex items-center gap-[4px]">
           <h1 className="text-[12px]">{percent}</h1>
 
           {icon}
         </div>
-      </div>
+      </Link>
     </Card>
   );
 };

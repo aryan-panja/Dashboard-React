@@ -32,8 +32,8 @@ export const MapCard = () => {
       <Map />
 
       {markers.map(({ name, value, width }, index) => (
-        <div className="w-full">
-          <div className="flex items-center justify-between" key={index}>
+        <div className="w-full" key={index}>
+          <div className="flex items-center justify-between">
             <h1>{name}</h1>
             <h1>{value}</h1>
           </div>
@@ -64,9 +64,9 @@ const Map = () => {
       {/* World Map */}
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
-          geographies.map((geo) => (
+          geographies.map((geo, i) => (
             <Geography
-              key={geo.rsmKey}
+              key={i}
               geography={geo}
               style={{
                 default: { fill: "#A8C5DA", outline: "none" },

@@ -16,6 +16,7 @@ import {
 
 import React, { forwardRef } from "react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router";
 
 // 🧱 Sidebar Block
 export const SidebarBlock = forwardRef(
@@ -53,39 +54,48 @@ export const SidebarBlockHeading = forwardRef(
 );
 SidebarBlockHeading.displayName = "SidebarBlockHeading";
 
-export const SidebarList = ({ data }) => {
+export const SidebarList = ({ data, active }) => {
   return (
     <SidebarGroup className={"pl-0"}>
       <SidebarGroupContent>
         <SidebarMenu>
           {data.map((d, i) => (
-            <SidebarMenuItem key={i}>
-              <Collapsible className="group/collapsible [&[data-state=open]>button>svg:first-child]:rotate-90">
-                <CollapsibleTrigger asChild className={"pl-1"}>
-                  <SidebarMenuButton
-                    className={"px-[8px] py-[4px] text-[14px]"}
-                  >
-                    <ChevronRight className="transition-transform" />
-                    <div className="flex items-center justify-center gap-[4px]">
-                      {d.logo}
-                      {/* <Folder /> */}
-                      {d.name}
-                    </div>
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-                {d.pages && (
-                  <CollapsibleContent>
-                    <SidebarMenuSub className={"gap-[4px]"}>
-                      {d.pages.map((subItem, index) => (
-                        <div key={index} className="px-[8px] py-[4px]">
-                          {subItem.name}
-                        </div>
-                      ))}
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
-                )}
-              </Collapsible>
-            </SidebarMenuItem>
+            <Link
+              to={`/dashboard${d.url}`}
+              key={i}
+              className={` ${active === d.name.toLowerCase() ? "bg-muted-background" : ""} relative rounded-[8px]`}
+            >
+              {active === d.name.toLowerCase() && (
+                <div className="absolute top-1/2 left-0 h-[16px] w-[4px] -translate-y-1/2 rounded-[8px] bg-black"></div>
+              )}
+              <SidebarMenuItem key={i}>
+                <Collapsible className="group/collapsible [&[data-state=open]>button>svg:first-child]:rotate-90">
+                  <CollapsibleTrigger asChild className={"pl-1"}>
+                    <SidebarMenuButton
+                      className={"px-[8px] py-[4px] text-[14px]"}
+                    >
+                      <ChevronRight className="transition-transform" />
+                      <div className="flex items-center justify-center gap-[4px]">
+                        {d.logo}
+                        {/* <Folder /> */}
+                        {d.name}
+                      </div>
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  {d.pages && (
+                    <CollapsibleContent>
+                      <SidebarMenuSub className={"gap-[4px]"}>
+                        {d.pages.map((subItem, index) => (
+                          <div key={index} className="px-[8px] py-[4px]">
+                            {subItem.name}
+                          </div>
+                        ))}
+                      </SidebarMenuSub>
+                    </CollapsibleContent>
+                  )}
+                </Collapsible>
+              </SidebarMenuItem>
+            </Link>
           ))}
         </SidebarMenu>
       </SidebarGroupContent>

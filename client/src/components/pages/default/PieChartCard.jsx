@@ -44,7 +44,10 @@ export const PieChartCard = () => {
 
         <div className="flex w-full flex-col justify-center gap-[12px]">
           {data.map((item, index) => (
-            <div key={index} className="flex justify-between">
+            <div
+              key={index}
+              className="hover:bg-muted-background-2 flex justify-between rounded-[8px]"
+            >
               {/* Left side */}
               <div className="flex min-w-0 items-center py-[2px] pr-[8px] pl-[4px]">
                 <div className="relative aspect-square size-[16px] flex-shrink-0">
@@ -57,7 +60,7 @@ export const PieChartCard = () => {
               </div>
 
               {/* Right side */}
-              <h1 className="text-right text-[12px] tabular-nums">
+              <h1 className="py-[2px] pr-[8px] pl-[4px] text-right text-[12px] tabular-nums">
                 ${item.value.toFixed(2)}
               </h1>
             </div>

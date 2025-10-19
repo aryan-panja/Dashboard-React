@@ -34,11 +34,15 @@ import {
 } from "@/components/ui/sidebar";
 import { BellIcon, LightIcon, RecentIcon, StarIcon } from "@/icons/NavbarIcons";
 import { Star } from "lucide-react";
-import { Outlet, useLocation } from "react-router";
+import { Link, Outlet, useLocation } from "react-router";
 import { cn } from "@/lib/utils";
 
 export const AppLayout = () => {
   const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean); // remove empty strings
+
+  // Helper to capitalize first letter
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
   // console.log(location);
 
@@ -49,8 +53,8 @@ export const AppLayout = () => {
           "bg-background w-[212px] gap-[16px] border-r-[1px] border-[#1C1C1C1A] px-[16px] py-[20px]"
         }
       />
-      <SidebarInset >
-        <header className="bg-background sticky top-0 flex h-14 shrink-0 items-center gap-2 border-b-[1px] z-50">
+      <SidebarInset>
+        <header className="bg-background sticky top-0 z-50 flex h-14 shrink-0 items-center gap-2 border-b-[1px]">
           <div className="flex w-full items-center justify-between gap-2 px-[28px] py-[20px]">
             {" "}
             {/* left */}
@@ -58,44 +62,52 @@ export const AppLayout = () => {
             <div className="flex items-center justify-start gap-[8px]">
               <SidebarTrigger />
 
-              <StarIcon />
+              <StarIcon className="hover:bg-muted-background-2 rounded-[8px]" />
 
               <Breadcrumb>
-                <BreadcrumbList className={"gap-[8px]"}>
-                  <BreadcrumbItem>
-                    <BreadcrumbPage className="line-clamp-1">
-                      Dashboards
-                    </BreadcrumbPage>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator>
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                      <g
-                        id="SVGRepo_tracerCarrier"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></g>
-                      <g id="SVGRepo_iconCarrier">
-                        {" "}
-                        <path
-                          d="M16 3L8 21"
-                          stroke="#1C1C1C33"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        ></path>{" "}
-                      </g>
-                    </svg>
-                  </BreadcrumbSeparator>
-                  <BreadcrumbItem>
-                    <BreadcrumbPage className="line-clamp-1">
-                      Default
-                    </BreadcrumbPage>
-                  </BreadcrumbItem>
+                <BreadcrumbList className="gap-[8px]">
+                  {pathSegments.map((segment, index) => {
+                    const isLast = index === pathSegments.length - 1;
+                    const path =
+                      "/" + pathSegments.slice(0, index + 1).join("/");
+
+                    return (
+                      <React.Fragment key={segment}>
+                        <BreadcrumbItem>
+                          {isLast ? (
+                            <BreadcrumbPage className="line-clamp-1 font-medium text-black capitalize">
+                              {capitalize(segment)}
+                            </BreadcrumbPage>
+                          ) : (
+                            <Link
+                              to={path}
+                              className="text-muted-foreground hover:bg-muted-background-2 rounded-[8px] px-[8px] py-[4px] capitalize"
+                            >
+                              {capitalize(segment)}
+                            </Link>
+                          )}
+                        </BreadcrumbItem>
+
+                        {!isLast && (
+                          <BreadcrumbSeparator>
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M16 3L8 21"
+                                stroke="#1C1C1C33"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              ></path>
+                            </svg>
+                          </BreadcrumbSeparator>
+                        )}
+                      </React.Fragment>
+                    );
+                  })}
                 </BreadcrumbList>
               </Breadcrumb>
             </div>
@@ -105,18 +117,18 @@ export const AppLayout = () => {
                 className={"w-[160px] rounded-[8px] border-0 bg-[#1C1C1C0D]"}
               />
               <div className="flex items-center gap-[8px]">
-                <LightIcon />
+                <LightIcon className="hover:bg-muted-background-2 rounded-[8px]"/>
 
-                <RecentIcon />
+                <RecentIcon className="hover:bg-muted-background-2 rounded-[8px]"/>
 
-                <BellIcon />
+                <BellIcon className="hover:bg-muted-background-2 rounded-[8px]"/>
 
                 <SidebarTrigger />
               </div>
             </div>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-[20px] p-[26px] overflow-hidden">
+        <div className="flex flex-1 flex-col gap-[20px] overflow-hidden p-[26px]">
           <Outlet />
         </div>
       </SidebarInset>
