@@ -64,7 +64,7 @@ export const ChartBarStacked = () => {
           <XAxis
             dataKey="month"
             tick={{ fill: "#6b7280", fontSize: 12 }}
-            axisLine={false}
+            axisLine={true}
             tickLine={false}
           />
           <YAxis
