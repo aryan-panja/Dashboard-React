@@ -49,8 +49,8 @@ export const AppLayout = () => {
           "bg-background w-[212px] gap-[16px] border-r-[1px] border-[#1C1C1C1A] px-[16px] py-[20px]"
         }
       />
-      <SidebarInset>
-        <header className="bg-background sticky top-0 flex h-14 shrink-0 items-center gap-2 border-b-[1px]">
+      <SidebarInset >
+        <header className="bg-background sticky top-0 flex h-14 shrink-0 items-center gap-2 border-b-[1px] z-50">
           <div className="flex w-full items-center justify-between gap-2 px-[28px] py-[20px]">
             {" "}
             {/* left */}

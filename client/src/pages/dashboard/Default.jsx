@@ -3,6 +3,7 @@ import { ChartBarStacked } from "@/components/pages/default/ChartBarStacked";
 import { MapCard } from "@/components/pages/default/MapCard";
 import { PieChartCard } from "@/components/pages/default/PieChartCard";
 import { RevenueChart } from "@/components/pages/default/RevenueChart";
+import { TopProductsTable } from "@/components/pages/default/TopProductsTable";
 import { Card } from "@/components/ui/card";
 import { TrendDownIcon, TrendUpIcon } from "@/icons/MiscIcons";
 import { cn } from "@/lib/utils";
@@ -72,7 +73,9 @@ export const Default = () => {
           <MapCard />
         </div>
 
-        <div className="col-span-3">Hi</div>
+        <div className="col-span-3">
+          <TopProductsTable />
+        </div>
 
         <div className="col-span-1">
           <PieChartCard />
