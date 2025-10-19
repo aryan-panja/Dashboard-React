@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Annotation,
   ComposableMap,
   Geographies,
   Geography,
@@ -51,6 +50,7 @@ export const MapCard = () => {
   );
 };
 
+// world map geo url
 const geoUrl = "https://unpkg.com/world-atlas@2/countries-110m.json";
 
 const Map = ({ fill }) => {
@@ -58,7 +58,6 @@ const Map = ({ fill }) => {
     <ComposableMap
       projection="geoEqualEarth"
       projectionConfig={{
-        // scale: 147,
         center: [0, 0],
       }}
       className="h-full w-full"

@@ -1,5 +1,3 @@
-"use client";
-
 import { Card } from "@/components/ui/card";
 import {
   Table,
@@ -50,7 +48,8 @@ export const TopProductsTable = () => {
 
       <div className="overflow-x-auto">
         <Table>
-          <TableHeader className="[&_th]:font-[400] [&_th]:text-[12px] [&_th]:text-muted-foreground">
+          {/* used alias so that the table headers are consistent and easily readable and maintainable */}
+          <TableHeader className="[&_th]:text-muted-foreground [&_th]:text-[12px] [&_th]:font-[400]">
             <TableRow>
               <TableHead className="w-[224px] text-left">Name</TableHead>
               <TableHead className="w-[130px] text-right">Price</TableHead>
@@ -58,7 +57,7 @@ export const TopProductsTable = () => {
               <TableHead className="w-[130px] text-right">Amount</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody className={"[&_td]:font-[400] [&_td]:text-[12px]"}>
+          <TableBody className={"[&_td]:text-[12px] [&_td]:font-[400]"}>
             {products.map((product, index) => (
               <TableRow key={index}>
                 <TableCell className="font-medium">{product.name}</TableCell>

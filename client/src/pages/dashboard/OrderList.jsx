@@ -6,6 +6,7 @@ export const OrderList = () => {
     <div>
       <h1 className="font-[600]">Order List</h1>
 
+      {/* table component */}
       <TableComponent />
     </div>
   );

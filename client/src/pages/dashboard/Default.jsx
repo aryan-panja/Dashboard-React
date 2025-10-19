@@ -1,4 +1,3 @@
-import { PageLayout } from "@/components/custom/PageLayout";
 import { ChartBarStacked } from "@/components/pages/default/ChartBarStacked";
 import { MapCard } from "@/components/pages/default/MapCard";
 import { PieChartCard } from "@/components/pages/default/PieChartCard";
@@ -11,6 +10,10 @@ import { TrendDownIcon, TrendUpIcon } from "@/icons/MiscIcons";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { Link } from "react-router";
+
+// data for the data cards
+// put them in an array to map through them
+// put them outside the component to avoid re-creation on each render
 
 const data = [
   {
@@ -103,6 +106,7 @@ export const Default = () => {
   );
 };
 
+// data card component
 const DataCard = ({
   className,
   heading,

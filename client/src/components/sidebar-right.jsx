@@ -1,19 +1,5 @@
 import * as React from "react";
-import { Folder, Plus } from "lucide-react";
-
-import { Calendars } from "@/components/calendars";
-import { DatePicker } from "@/components/date-picker";
-import { NavUser } from "@/components/nav-user";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarSeparator,
-} from "@/components/ui/sidebar";
+import { Sidebar, SidebarContent } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { SidebarBlock, SidebarBlockHeading } from "./custom/CustomSidebar";
@@ -122,6 +108,7 @@ export function SidebarRight({ className, ...props }) {
   );
 }
 
+// custom list for this sidebar only
 const SidebarList = ({ heading, data, stepper = false }) => {
   return (
     <>
@@ -134,7 +121,6 @@ const SidebarList = ({ heading, data, stepper = false }) => {
         <div className="flex items-start gap-[8px] p-[4px]" key={i}>
           <div className="relative">
             {n.logo && (
-              // <div className="rounded-[8px] bg-[#E3F5FF] p-[4px]">{n.logo}</div>
               <>{n.logo}</>
             )}
             {n.avatar && (
@@ -147,6 +133,8 @@ const SidebarList = ({ heading, data, stepper = false }) => {
               </Avatar>
             )}
 
+            {/* stepper */}
+            {/* just render vertical lines before last element */}
             {stepper && i !== data.length - 1 && (
               <div className="absolute top-[130%] left-1/2 h-[14px] w-[1px] -translate-x-1/2 bg-[#1C1C1C1A]" />
             )}

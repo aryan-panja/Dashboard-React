@@ -9,44 +9,23 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
-  ArrowDownUp,
   ChevronDownIcon,
-  ChevronFirstIcon,
-  ChevronLastIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-  CircleAlertIcon,
   CircleXIcon,
-  Columns3Icon,
   EllipsisIcon,
-  ListFilterIcon,
   Search,
-  TrashIcon,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
@@ -56,24 +35,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
 } from "@/components/ui/pagination";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -99,12 +65,15 @@ const multiColumnFilterFn = (row, columnId, filterValue) => {
   return searchableRowContent.includes(searchTerm);
 };
 
+// filter function for status column
 const statusFilterFn = (row, columnId, filterValue) => {
   if (!filterValue?.length) return true;
   const status = row.getValue(columnId);
   return filterValue.includes(status);
 };
 
+// dynamic columns
+// i can pass these as props to make this table resusable for other data too
 const columns = [
   {
     id: "select",
@@ -242,6 +211,8 @@ export const TableComponent = () => {
   ]);
 
   const [data, setData] = useState([]);
+
+  // api call to fetch data
   useEffect(() => {
     async function fetchPosts() {
       const res = await fetch(
@@ -263,6 +234,7 @@ export const TableComponent = () => {
     table.resetRowSelection();
   };
 
+  // react table instance
   const table = useReactTable({
     data,
     columns,

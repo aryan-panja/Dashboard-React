@@ -1,8 +1,8 @@
 import { Card } from "@/components/ui/card";
 
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
-export const description = "A donut chart";
+// color configuration for the pie chart
 const COLORS = [
   "var(--chart-4)",
   "var(--chart-5)",

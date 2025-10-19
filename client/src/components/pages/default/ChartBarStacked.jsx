@@ -1,4 +1,3 @@
-import { TrendingUp } from "lucide-react";
 import {
   Bar,
   BarChart,
@@ -11,17 +10,7 @@ import {
 
 import { Card } from "@/components/ui/card";
 
-export const description = "A stacked bar chart with a legend";
-
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
-
+// data for chart, put it outside the component to avoid re-creation on each render
 const data = [
   { month: "Jan", projections: 17, actuals: 4 },
   { month: "Feb", projections: 21, actuals: 5 },
@@ -39,9 +28,12 @@ export const ChartBarStacked = () => {
       }
     >
       <h1 className="text-[14px] font-[600]">Projections vs Actuals</h1>
+
+      {/* used responsive container so that it is easier to make good flow of charts */}
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
+          // margin set to adjust chart position within the container for taking proper width and height
           margin={{ top: 0, right: 0, left: -20, bottom: 0 }}
           barCategoryGap={15}
         >
@@ -61,7 +53,6 @@ export const ChartBarStacked = () => {
             axisLine={false}
             tickLine={false}
             label={{
-              // value: "30M",
               angle: -90,
               position: "insideLeft",
               offset: 10,

@@ -1,3 +1,5 @@
+// base layout for the app with sidebar, header, and main content area
+
 import * as React from "react";
 import {
   ArrowUpRightIcon,
@@ -41,8 +43,10 @@ import {
   RecentIconDark,
   StarIconDark,
 } from "@/icons/dark/NavbarIcons";
+import { Analytics } from "@vercel/analytics/react";
 
 export const AppLayout = () => {
+  // for theme toggle
   const { setTheme, theme } = useTheme();
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
@@ -54,6 +58,7 @@ export const AppLayout = () => {
 
   const iconsClassName = "hover:bg-muted-background-2 rounded-[8px]";
 
+  // icons based on theme
   const icons =
     theme === "dark"
       ? {
@@ -81,6 +86,7 @@ export const AppLayout = () => {
 
   return (
     <SidebarProvider>
+      {/* left sidebar */}
       <SidebarLeft
         className={
           "bg-background z-50 w-[212px] gap-[16px] border-r-[1px] px-[16px] py-[20px]"
@@ -91,7 +97,6 @@ export const AppLayout = () => {
           <div className="flex w-full items-center justify-between gap-2 px-[28px] py-[20px]">
             {" "}
             {/* left */}
-            {/*flex-1*/}
             <div className="flex items-center justify-start gap-[8px]">
               <SidebarTrigger />
 
@@ -105,6 +110,7 @@ export const AppLayout = () => {
                       "/" + pathSegments.slice(0, index + 1).join("/");
 
                     return (
+                      // using React.Fragment to avoid extra wrapper element or to prevent creating unnecessary DOM nodes
                       <React.Fragment key={segment}>
                         <BreadcrumbItem>
                           {isLast ? (
@@ -134,10 +140,11 @@ export const AppLayout = () => {
             <div className="flex items-center gap-[20px]">
               <NavCommand
                 className={
-                  "dark:placeholder:text-[]#FFFFFF33] w-[160px] rounded-[8px] border-0 bg-[#1C1C1C0D] dark:bg-[#FFFFFF1A] dark:text-[#FFFFFF33]"
+                  "w-[160px] rounded-[8px] border-0 bg-[#1C1C1C0D] dark:bg-[#FFFFFF1A] dark:text-[#FFFFFF33] dark:placeholder:text-[#FFFFFF33]"
                 }
               />
               <div className="flex items-center gap-[8px]">
+                {/* dynamic icons */}
                 {icons.light}
 
                 {icons.recent}
@@ -150,14 +157,24 @@ export const AppLayout = () => {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-[20px] overflow-hidden p-[26px]">
+          {/* main content area */}
           <Outlet />
+
+          {/* vercel analytics */}
+          <Analytics />
         </div>
       </SidebarInset>
+
+      {/* right sidebar */}
       <SidebarRight className="bg-background w-[280px] gap-[24px] border-l-[1px] p-[20px]" />
     </SidebarProvider>
   );
 };
 
+
+// command palette component
+// triggered by Cmd/Ctrl + /
+// i have not implemented the actual navigation functionality or scalable search logic here
 export const NavCommand = ({ className }) => {
   const [open, setOpen] = React.useState(false);
 

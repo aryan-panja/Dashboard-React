@@ -1,3 +1,6 @@
+// custom sidebar list component with collapsible menu items
+// shadcn + my customizations
+
 import { ChevronRight } from "lucide-react";
 import {
   Collapsible,
@@ -19,7 +22,8 @@ import { cn } from "@/lib/utils";
 import { Link } from "react-router";
 import { useTheme } from "@/context/theme-provider";
 
-// 🧱 Sidebar Block
+// Sidebar Block
+// to implement sections in sidebar like main, favorites, workspaces, etc.
 export const SidebarBlock = forwardRef(
   ({ className, children, ...props }, ref) => {
     return (
@@ -38,7 +42,8 @@ export const SidebarBlock = forwardRef(
 );
 SidebarBlock.displayName = "SidebarBlock";
 
-// 🏷️ Sidebar Block Heading
+// Sidebar Block Heading
+// heading for each sidebar block
 export const SidebarBlockHeading = forwardRef(
   ({ className, ...props }, ref) => {
     return (
@@ -55,6 +60,8 @@ export const SidebarBlockHeading = forwardRef(
 );
 SidebarBlockHeading.displayName = "SidebarBlockHeading";
 
+// Sidebar List
+// list of sidebar items with collapsible sub-items
 export const SidebarList = ({ data, active }) => {
   const { theme } = useTheme();
   return (

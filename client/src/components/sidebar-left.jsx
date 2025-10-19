@@ -1,47 +1,8 @@
 import * as React from "react";
-import {
-  AudioWaveform,
-  Blocks,
-  Calendar,
-  ChevronRight,
-  Command,
-  Folder,
-  Home,
-  Inbox,
-  MessageCircleQuestion,
-  MoreHorizontal,
-  Search,
-  Settings2,
-  Sparkles,
-  Trash2,
-} from "lucide-react";
-
-import { NavFavorites } from "@/components/nav-favorites";
-import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
-import { NavWorkspaces } from "@/components/nav-workspaces";
-import { TeamSwitcher } from "@/components/team-switcher";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarRail,
-} from "@/components/ui/sidebar";
+import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "./ui/collapsible";
 import {
   SidebarBlock,
   SidebarBlockHeading,
@@ -59,8 +20,19 @@ import {
   SocialIcon,
 } from "@/icons/SidebarIcons";
 import { useLocation } from "react-router";
-import { AccountIconDark, BagIconDark, BookIconDark, FolderIconDark, OpenBookIconDark, PeopleIconDark, PieChartIconDark, ProfileIconDark, SocialIconDark } from "@/icons/dark/SidebarIcons";
+import {
+  AccountIconDark,
+  BagIconDark,
+  BookIconDark,
+  FolderIconDark,
+  OpenBookIconDark,
+  PeopleIconDark,
+  PieChartIconDark,
+  ProfileIconDark,
+  SocialIconDark,
+} from "@/icons/dark/SidebarIcons";
 
+// data for sidebar
 const sidebarData = {
   fav: [
     {
@@ -109,8 +81,8 @@ const sidebarData = {
     {
       name: "eCommerce",
       url: "#",
-      logo: <BagIcon/>,
-      dark: <BagIconDark/>,
+      logo: <BagIcon />,
+      dark: <BagIconDark />,
     },
     {
       name: "Projects",
@@ -189,7 +161,7 @@ const tabs = [
 export function SidebarLeft({ className, ...props }) {
   const location = useLocation();
 
-  const active = location.pathname.split("/").filter(Boolean).pop(); // "default"  
+  const active = location.pathname.split("/").filter(Boolean).pop(); // "default"
   // console.log("Last Segment:", lastSegment);
 
   const [tab, setTab] = React.useState(1);
@@ -241,10 +213,6 @@ export function SidebarLeft({ className, ...props }) {
           <SidebarBlockHeading>Pages</SidebarBlockHeading>
           <SidebarList data={sidebarData.pages} />
         </SidebarBlock>
-
-        {/* <NavFavorites favorites={data.favorites} /> */}
-        {/* <NavWorkspaces workspaces={data.workspaces} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

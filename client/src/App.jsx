@@ -8,7 +8,11 @@ import { ThemeProvider } from "./context/theme-provider";
 
 function App() {
   return (
+
+    // for changing the theme light/dark
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+
+      {/* routing */}
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
