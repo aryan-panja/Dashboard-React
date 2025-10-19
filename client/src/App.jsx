@@ -10,6 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
+          <Route path="/" element={<Default />} />
           <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/dashboard/default" element={<Default />} />
           <Route path="/dashboard/order-list" element={<OrderList />} />
